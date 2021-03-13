@@ -23,14 +23,10 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Stateful widget: TextInput')
-      ),
-      body: TextInputWidget()
-    );
+        appBar: AppBar(title: Text('Stateful widget: TextInput')),
+        body: TextInputWidget());
   }
 }
-
 
 // Responsable for taking construction arguments, etc
 class TextInputWidget extends StatefulWidget {
@@ -40,13 +36,36 @@ class TextInputWidget extends StatefulWidget {
 
 // Resposable for render and handling each state
 class _TextInputWidgetState extends State<TextInputWidget> {
+  final controller = TextEditingController();
+  String text = "";
+
+/*   void dispose() {
+    super.dispose();
+    controller.dispose();
+  } */
+
+  void changeText(text) {
+    if (text == "chau text") {
+      controller.clear();
+      text = "";
+    }
+    setState(() { // force to refresh the widget
+      this.text = text;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        prefixIcon: Icon(Icons.message), labelText: "Type a message:"
-      ),
-      
+    return Column(
+      children: [
+        TextField(
+          controller: this.controller,
+          decoration: InputDecoration(
+              prefixIcon: Icon(Icons.message), labelText: "Type a message:"),
+          onChanged: (text) => this.changeText(text),
+        ),
+        Text(this.text)
+      ],
     );
   }
 }
