@@ -24,18 +24,29 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hola Mundo'),
+        title: Text('Stateful widget: TextInput')
       ),
-      body: Column(
-        children: [ TestWidget(), TestWidget(), TestWidget()],
-      ),
+      body: TextInputWidget()
     );
   }
 }
 
-class TestWidget extends StatelessWidget {
+
+// Responsable for taking construction arguments, etc
+class TextInputWidget extends StatefulWidget {
+  @override
+  _TextInputWidgetState createState() => _TextInputWidgetState();
+}
+
+// Resposable for render and handling each state
+class _TextInputWidgetState extends State<TextInputWidget> {
   @override
   Widget build(BuildContext context) {
-    return Text("Hola desde el test");
+    return TextField(
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.message), labelText: "Type a message:"
+      ),
+      
+    );
   }
 }
