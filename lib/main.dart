@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tim & CHAMA App',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+        primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(),
@@ -19,53 +19,66 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Stateful widget: TextInput')),
-        body: TextInputWidget());
-  }
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
-// Responsable for taking construction arguments, etc
-class TextInputWidget extends StatefulWidget {
-  @override
-  _TextInputWidgetState createState() => _TextInputWidgetState();
-}
-
-// Resposable for render and handling each state
-class _TextInputWidgetState extends State<TextInputWidget> {
-  final controller = TextEditingController();
+class _MyHomePageState extends State<MyHomePage> {
   String text = "";
 
-/*   void dispose() {
-    super.dispose();
-    controller.dispose();
-  } */
-
-  void changeText(text) {
-    if (text == "chau text") {
-      controller.clear();
-      text = "";
-    }
-    setState(() { // force to refresh the widget
+  void changeText(String text) {
+    this.setState(() {
       this.text = text;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
-          controller: this.controller,
-          decoration: InputDecoration(
-              prefixIcon: Icon(Icons.message), labelText: "Type a message:"),
-          onChanged: (text) => this.changeText(text),
-        ),
-        Text(this.text)
-      ],
+    return Scaffold(
+        appBar: AppBar(title: Text('Button presses and callbacks')),
+        body: Column(
+          children: [TextInputWidget(this.changeText), Text(this.text)],
+        ));
+  }
+}
+
+class TextInputWidget extends StatefulWidget {
+  final Function(String) callback;
+
+  TextInputWidget(this.callback); // {param} makes an optional parameter (param: asd) [] optional unnamed, without any of this: mandatory param
+
+  @override
+  _TextInputWidgetState createState() => _TextInputWidgetState();
+}
+
+class _TextInputWidgetState extends State<TextInputWidget> {
+  final controller = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  void click() {
+    widget.callback(controller.text);
+    controller.clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: this.controller,
+      decoration: InputDecoration(
+          prefixIcon: Icon(Icons.message),
+          labelText: "Type a message:",
+          suffixIcon: IconButton(
+            icon: Icon(Icons.send),
+            splashColor: Colors.lightBlue,
+            tooltip: "Post message",
+            onPressed: this.click,
+          )),
     );
   }
 }
