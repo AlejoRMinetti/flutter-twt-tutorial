@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tim & CHAMA App',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(),
@@ -26,7 +26,16 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Hola Mundo'),
       ),
-      body: Text("Hola desde el body"),
+      body: Column(
+        children: [ TestWidget(), TestWidget(), TestWidget()],
+      ),
     );
+  }
+}
+
+class TestWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text("Hola desde el test");
   }
 }
