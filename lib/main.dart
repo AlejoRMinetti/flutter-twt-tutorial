@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Expanded(
                 // expanded for get space from available free space
                 child: PostList(this.posts)),
-            Expanded(child: TextInputWidget(this.newPost))
+            TextInputWidget(this.newPost)
           ],
         ));
   }
@@ -88,6 +88,7 @@ class _TextInputWidgetState extends State<TextInputWidget> {
   void click() {
     widget.callback(controller.text);
     controller.clear();
+    FocusScope.of(context).unfocus();
   }
 
   @override
