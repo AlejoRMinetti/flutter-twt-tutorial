@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "938823778863",
+    "project_id": "messageapptwttuto",
+    "storage_bucket": "messageapptwttuto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938823778863:android:797919082b6a9aaeea3cda",
+        "android_client_info": {
+          "package_name": "com.example.hello_world"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938823778863-udai45sk4rtbteotecoefo0ab4f5047s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hello_world",
+            "certificate_hash": "bae695898c0d624d43d01e76a7acebcf1c0d5cb7"
+          }
+        },
+        {
+          "client_id": "938823778863-frhbn32brrmhkl89e0tge8iqsbbmu984.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpjWP-JHvWBcK3MisNzSp5q-0QS_3VYl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938823778863-frhbn32brrmhkl89e0tge8iqsbbmu984.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
