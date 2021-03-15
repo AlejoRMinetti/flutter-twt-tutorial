@@ -12,3 +12,20 @@ DatabaseReference savePost(Post post) {
 void updatePost(Post post, DatabaseReference id) {
   id.update(post.toJson());
 }
+
+Future<List<Post>> getAllPosts() async {
+  DataSnapshot dataSnapshot = await databaseReference.child('posts/').once();
+  List<Post> posts = [];
+
+  if (dataSnapshot.value != null) {
+    dataSnapshot.value.forEach((key, value) {
+      // key of DB: 1st alphanumeric code of each message
+      // value is a dictionary with all data: author, body, usersLiked
+      Post post = createPost(value);
+      post.setId(databaseReference.child('posts/' + key));
+      posts.add(post);
+    });
+  }
+
+  return posts;
+}

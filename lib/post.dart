@@ -35,3 +35,16 @@ class Post {
     };
   }
 }
+
+Post createPost(record) {
+  Map<String, dynamic> attributes = {
+    'author': '',
+    'usersLiked': [],
+    'body': ''
+  };
+
+  record.forEach((key, value) => {attributes[key] = value});
+  Post post = new Post(attributes['body'], attributes['author']);
+  post.usersLiked = new Set.from(attributes['usersLiked']);
+  return post;
+}

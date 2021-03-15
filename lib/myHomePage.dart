@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hello_world/database.dart';
@@ -25,14 +27,27 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void updatePosts() {
+    getAllPosts().then((posts) => {
+          this.setState(() {
+            this.posts = posts;
+          })
+        });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    updatePosts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('Message list page')),
         body: Column(
           children: <Widget>[
-            Expanded(
-                child: PostList(this.posts, widget.user)),
+            Expanded(child: PostList(this.posts, widget.user)),
             TextInputWidget(this.newPost)
           ],
         ));
