@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:hello_world/database.dart';
 
 class Post {
   String body;
@@ -15,6 +16,11 @@ class Post {
     } else {
       this.usersLiked.add(user.uid);
     }
+    this.update();
+  }
+
+  void update() {
+    updatePost(this, this._id);
   }
 
   void setId(DatabaseReference id) {

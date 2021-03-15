@@ -3,8 +3,12 @@ import 'post.dart';
 
 final databaseReference = FirebaseDatabase.instance.reference();
 
-DatabaseReference savePost(Post post){
+DatabaseReference savePost(Post post) {
   var id = databaseReference.child('posts/').push();
   id.set(post.toJson());
   return id;
+}
+
+void updatePost(Post post, DatabaseReference id) {
+  id.update(post.toJson());
 }
